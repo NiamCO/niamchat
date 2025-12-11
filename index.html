@@ -1,1 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NiamChat - Enter Username</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        /* Inline styles for index page only */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+        
+        .login-box h2 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+        }
+        
+        .username-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+        
+        .username-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .start-chat-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .start-chat-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .start-chat-btn:active {
+            transform: translateY(0);
+        }
+        
+        .rules {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+        
+        .rules ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        .rules li {
+            margin-bottom: 8px;
+        }
+        
+        .error-message {
+            color: #ef4444;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="logo">NiamChat</div>
+            <h2>Choose Your Username</h2>
+            
+            <div class="error-message" id="errorMessage"></div>
+            
+            <input type="text" 
+                   id="usernameInput" 
+                   class="username-input" 
+                   placeholder="Enter username (e.g., CoolUser123)"
+                   maxlength="30"
+                   autocomplete="off">
+            
+            <button id="startChatBtn" class="start-chat-btn">
+                Start Chatting
+            </button>
+            
+            <div class="rules">
+                <p><strong>Chat Rules:</strong></p>
+                <ul>
+                    <li>No inappropriate content</li>
+                    <li>Respect all users</li>
+                    <li>Max 5MB images only</li>
+                    <li>No emojis allowed</li>
+                    <li>Admin/Owner have special privileges</li>
+                </ul>
+                <p>By joining, you agree to these rules.</p>
+            </div>
+        </div>
+    </div>
 
+    <script src="js/supabase-config.js"></script>
+    <script src="js/icons.js"></script>
+    <script>
+        // Simple username validation and redirection
+        document.getElementById('startChatBtn').addEventListener('click', async () => {
+            const usernameInput = document.getElementById('usernameInput');
+            const errorMessage = document.getElementById('errorMessage');
+            const username = usernameInput.value.trim();
+            
+            // Validation
+            if (!username) {
+                errorMessage.textContent = 'Please enter a username';
+                errorMessage.style.display = 'block';
+                return;
+            }
+            
+            if (username.length < 2) {
+                errorMessage.textContent = 'Username must be at least 2 characters';
+                errorMessage.style.display = 'block';
+                return;
+            }
+            
+            if (username.length > 30) {
+                errorMessage.textContent = 'Username must be 30 characters or less';
+                errorMessage.style.display = 'block';
+                return;
+            }
+            
+            // Check for emojis (simple check)
+            const emojiRegex = /[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}]/u;
+            if (emojiRegex.test(username)) {
+                errorMessage.textContent = 'Emojis are not allowed in usernames';
+                errorMessage.style.display = 'block';
+                return;
+            }
+            
+            // Store username in localStorage and redirect
+            localStorage.setItem('niamchat_username', username);
+            window.location.href = 'chat.html';
+        });
+        
+        // Allow Enter key to submit
+        document.getElementById('usernameInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('startChatBtn').click();
+            }
+        });
+        
+        // Load saved username if exists
+        const savedUsername = localStorage.getItem('niamchat_username');
+        if (savedUsername) {
+            document.getElementById('usernameInput').value = savedUsername;
+        }
+        
+        // Focus on input
+        document.getElementById('usernameInput').focus();
+    </script>
+</body>
+</html>
