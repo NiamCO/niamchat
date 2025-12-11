@@ -437,44 +437,85 @@ h1, h2, h3, h4 {
     transform: scale(1.02);
 }
 
-/* Owner Messages - INSANELY GOOD POPPY */
-/* Owner Messages - SIMPLE FIX - BIG AND VISIBLE */
+/* Owner Messages - Normal but Poppy */
 .message.owner {
-    max-width: 80%;
-    background: linear-gradient(135deg, #fffbeb, #fef3c7) !important;
+    max-width: 75%;
+    background: linear-gradient(135deg, #fffbeb, #fed7aa) !important;
     border: 3px solid #fbbf24 !important;
-    box-shadow: 0 10px 25px rgba(251, 191, 36, 0.4) !important;
+    border-left: 6px solid #dc2626 !important;
+    box-shadow: 
+        0 10px 20px rgba(251, 191, 36, 0.3),
+        0 6px 6px rgba(251, 191, 36, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
     position: relative;
     margin: 15px 0;
-    padding: 18px !important;
-    font-size: 1.1rem !important;
-    min-height: 80px !important;
+    padding: 18px 20px !important;
+    animation: gentlePop 0.4s ease;
+    transform-origin: left center;
 }
 
-/* Make text black and big */
+@keyframes gentlePop {
+    0% {
+        transform: scale(0.98);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Owner message text - normal but bold */
 .message.owner .message-content {
-    color: #000000 !important;
+    color: #1f2937 !important;
     font-weight: 500 !important;
     font-size: 1.05rem !important;
     line-height: 1.5 !important;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
 }
 
-/* Make username stand out */
+/* Owner username - slightly fancy */
 .message.owner .message-username {
     color: #92400e !important;
     font-weight: 700 !important;
-    font-size: 1.1rem !important;
+    font-size: 1rem !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-/* Owner badge - simple and visible */
+/* Owner badge - simple but poppy */
 .role-badge.owner {
     background: linear-gradient(135deg, #fbbf24, #dc2626) !important;
     color: white !important;
-    padding: 5px 12px !important;
-    border-radius: 15px !important;
+    padding: 4px 10px !important;
+    border-radius: 12px !important;
     font-weight: 700 !important;
-    margin-left: 10px !important;
-    font-size: 0.8rem !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.5px;
+    box-shadow: 0 3px 8px rgba(220, 38, 38, 0.3);
+}
+
+/* Hover effect - subtle pop */
+.message.owner:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 15px 25px rgba(251, 191, 36, 0.4),
+        0 8px 8px rgba(251, 191, 36, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Time stamp - slightly fancy */
+.message.owner .message-time {
+    color: #b45309 !important;
+    font-weight: 500 !important;
+}
+
+/* Make sure it's always readable */
+.message.owner * {
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 /* Admin Messages */
 .message.admin {
