@@ -1459,3 +1459,36 @@ h1, h2, h3, h4 {
 #privateChatBtn:hover {
     background: rgba(59, 130, 246, 0.05);
 }
+
+/* Fix for Private Chat button to look like others */
+#privateChatBtn {
+    text-decoration: none !important;
+    color: inherit !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 12px 20px !important;
+    border-left: 4px solid transparent !important;
+    transition: var(--transition) !important;
+}
+
+#privateChatBtn:hover {
+    background: rgba(59, 130, 246, 0.05) !important;
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+#privateChatBtn:active {
+    background: rgba(59, 130, 246, 0.1) !important;
+}
+
+/* Make the ↗ badge look nice */
+#privateBadge {
+    background: var(--primary-color) !important;
+    color: white !important;
+    padding: 2px 8px !important;
+    border-radius: 10px !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+}
