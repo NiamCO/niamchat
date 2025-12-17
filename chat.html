@@ -425,6 +425,7 @@
                 'publicChatIcon': 'publicChat',
                 'adminChatIcon': 'adminChat',
                 'privateChatIcon': 'privateChat',
+                'voiceChatIcon': 'voiceChat',
                 'logoutIcon': 'logout',
                 'reloadIcon': 'reload',
                 
@@ -484,6 +485,19 @@
             privateChatBtn.style.cursor = 'pointer';
         }
     });
+
+    // Voice Chat button click
+const voiceChatBtn = document.getElementById('voiceChatBtn');
+if (voiceChatBtn) {
+    voiceChatBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.open('https://YOUR-VOICE-CHAT-SITE.com', '_blank'); // CHANGE THIS
+    });
+    
+    // Make it look like others
+    voiceChatBtn.style = '';
+    voiceChatBtn.className = 'room-item';
+}
 </script>
 </body>
 </html>
