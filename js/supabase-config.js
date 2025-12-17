@@ -3,7 +3,7 @@ const SUPABASE_URL = 'https://cwbdhrlbflsygamnsanf.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN3YmRocmxiZmxzeWdhbW5zYW5mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzODgwOTEsImV4cCI6MjA4MDk2NDA5MX0.tpVyrDseLdJayTpoMGlkBPIXFJ9oRQ5G8ZIM0Bugpkw';
 
 // Initialize Supabase with correct headers
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+var supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     db: {
         schema: 'public'
     },
